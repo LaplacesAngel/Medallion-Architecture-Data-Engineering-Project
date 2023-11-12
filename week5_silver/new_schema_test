@@ -1,0 +1,26 @@
+
+schema_info = {"marketplace": "StringType",
+"customer_id": "IntegerType",
+"review_id": "StringType",
+"product_id": "StringType",
+"product_parent": "IntegerType",
+"product_title": "StringType",
+"product_category": "StringType",
+"star_rating": "IntegerType",
+"helpful_votes": "IntegerType",
+"total_votes": "IntegerType",
+"verified_purchase": "StringType",
+"review_headline": "StringType",
+"review_body": "StringType",
+"purchase_date": "StringType"}
+
+bronze_schema = [(key,value) for key, value in schema_info.items()]
+print(bronze_schema)
+
+bronze_reviews = None
+
+bronze_customers = None
+
+silver_data = None
+
+streaming_query = None
