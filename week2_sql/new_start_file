@@ -16,14 +16,33 @@ logger.LogManager.getLogger("org.apache.spark.SparkEnv"). setLevel( logger.Level
 # Question 1: Read the tab separated file named "resources/reviews.tsv.gz" into a dataframe. Call it "reviews".
 
 df = spark.read.csv("resources/reviews.tsv.gz", sep="\t", header=True)
+df.printSchema()
+print("\n")
 df.show()
 
 
 # Question 2: Create a virtual view on top of the reviews dataframe, so that we can query it with Spark SQL.
 
+df.createOrReplaceTempView("reviews")
+df2 = spark.sql("select * from reviews")
+df2.show()
+
 # Question 3: Add a column to the dataframe named "review_timestamp", representing the current time on your computer. 
 
+df3 = spark.sql("select marketplace, date_format(current_date(), 'MM/dd/yyy')\
+          as review_timestamp \
+          from reviews")
+
+df3.printSchema()
+df3.show(n=4)
+
+df4 = spark.sql("SELECT * FROM reviews")
+df4.show(n=4)
 # Question 4: How many records are in the reviews dataframe? 
+
+df5 = spark.sql("select COUNT(*) from reviews")
+value = df5.first()[0]
+print(int(value))
 
 # Question 5: Print the first 5 rows of the dataframe. 
 # Some of the columns are long - print the entire record, regardless of length.
