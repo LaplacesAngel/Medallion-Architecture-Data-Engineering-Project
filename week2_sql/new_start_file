@@ -47,9 +47,16 @@ print(int(value))
 # Question 5: Print the first 5 rows of the dataframe. 
 # Some of the columns are long - print the entire record, regardless of length.
 
+df4.show(n=5, truncate=False)
+
 # Question 6: Create a new dataframe based on "reviews" with exactly 1 column: the value of the product category field.
 # Look at the first 50 rows of that dataframe. 
 # Which value appears to be the most common?
+
+df6 = spark.sql("select product_category from reviews \
+                limit 50")
+
+df6.show()
 
 # Question 7: Find the most helpful review in the dataframe - the one with the highest number of helpful votes.
 # What is the product title for that review? How many helpful votes did it have?
